@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="UK-uk">
+<head>
+    <title>Словник шахової лексики</title>
+    <link rel="icon" href="img/chess-logo.jpg">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Онлайн версія «Словника шахової лексики української мови»">
+    <meta name="keywords" content="словник, шахи, лексика, українська, мова">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="vendors/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendors/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/common.css">
+
+    <script src="vendors/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="scripts/TextChange.js"></script>
+    <script src="scripts/common.js"></script>
+    <script>
+      const rowsToHtml = (rows) => {
+        return rows.map((row) => '<li>' +
+          '<div className="py-2"><div className="row">' +
+          '<div className="text-justify col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"><p>' +
+          row["description"] +
+          '</p></div>' +
+          '<div className="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">' +
+          '<p className="words-groups">Частина мови:<br><span className="text-primary">' +
+          row["part_of_speech"] +
+          '</span></p>' +
+          '</div>' +
+          '<div className="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">' +
+          '<p className="words-groups">Лексико-семантична група:<br><span className="text-primary">' +
+          row["lexical_group"] +
+          '</span></p>' +
+          '</div>' +
+          '<div className="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">' +
+          '<p className="words-groups">За характером вживання:<br><span className="text-primary">' +
+          row["characteristic"] +
+          '</span></p>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</li>')
+      }
+    </script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
+    <a class="navbar-brand" href="/" title="Home" alt="Home"><i class="fa fa-delicious fa-lg"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarsExampleDefault">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="all-lexis">Лексика</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">Вибірки лексики</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#" id="parts-of-speech">Частини мови</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" id="lexis-class">Лексико-семантична класифікація</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" id="class-char">Класифікація за характером вживання</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="card bg-dark text-white">
+    <img class="card-img" src="img/chess-img-head.jpg" alt="Card image">
+    <div class="card-img-overlay">
+        <h1 class="text-center" id="web-site-title">Словник шахової лексики української мови</h1>
+    </div>
+</div>
+
+<main role="main">
+
+    <div class="container">
+        <div class="py-2">
+            <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                <div class="form-group">
+                    <div class="row" method="get">
+                        <input class="form-control col-10" type="text" name="search" id="input-search"
+                               placeholder="Пошук..." autocomplete="off"/>
+<!--                     TODO: fix button-->
+                        <button class="btn btn-dark col-2">
+                            <i class="fa fa-search fa-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="int-menu"></div>
+
+        <div id="block-search-result">
+            <ul class="px-0" id="list-search-result">
+                <!-- Результат пошуку -->
+            </ul>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="text-center pt-5">
+
+        <small class="text-muted fixed-bottom"><a target="_blank" href="https://www.linkedin.com/in/maks-dev/"
+                                                  title="Maksym Derevianchenko">Сайт розроблено</a><br>Вінниця. ДонНУ
+            ім. Василя Стуса.<br>Прикладна лінгвістика. 2017<br>Оновлено в 2022</small>
+    </div>
+</footer>
+
+
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="vendors/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+<script src="vendors/bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

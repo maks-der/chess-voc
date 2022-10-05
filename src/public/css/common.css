@@ -1,0 +1,6 @@
+body{ background: #dfdfdf; }
+li{list-style: none;}
+h1{ text-shadow: 2px 2px #000 }
+.card, .card-img{ width: 100vw; height: auto;  }
+#search-error{ color: #ff0000; }
+.words-groups{ color: #555555; }

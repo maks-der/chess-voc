@@ -1,0 +1,24 @@
+{
+  "name": "ukr-chess-voc",
+  "version": "2.0.0",
+  "description": "Ukrainian chess vocabulary",
+  "main": "./src/index.js",
+  "module": "next",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Maksym Derevianchenko",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/postgres": "^5.1.0",
+    "@fastify/static": "^6.5.0",
+    "fastify": "^4.7.0",
+    "node": "^18.10.0",
+    "pg": "^8.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
