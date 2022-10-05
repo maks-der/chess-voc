@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const fastify = Fastify();
 
-const { APP_PORT, DATABASE_URL } = process.env;
+const { PORT, DATABASE_URL } = process.env;
 
 fastify.register(Postgres, {
   connectionString: DATABASE_URL
@@ -61,7 +61,7 @@ fastify.get('/api/vocabulary', (req, reply) => {
   });
 })
 
-fastify.listen({port: APP_PORT}, err => {
+fastify.listen({port: PORT}, err => {
   if (err) throw err
   console.log(`Server listening on ${fastify.server.address().port}`)
 })
