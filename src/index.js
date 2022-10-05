@@ -2,12 +2,15 @@ import Fastify from 'fastify';
 import Static from '@fastify/static';
 import Postgres from '@fastify/postgres';
 import path from 'path';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const fastify = Fastify();
-// const fastify = Fastify({ logger: true });
+
+const { DB_URL, DB_NAME, DB_USER, DB_PASS } = process.env;
 
 fastify.register(Postgres, {
-  connectionString: 'postgresql://root:secret@localhost:5432/ua-chess-voc'
+  connectionString: `postgresql://${DB_USER}:${DB_PASS}@${DB_URL}/${DB_NAME}`
 })
 
 fastify.register(Static, {
