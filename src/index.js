@@ -7,10 +7,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 const fastify = Fastify();
 
-const { APP_PORT, DB_URL, DB_NAME, DB_USER, DB_PASS } = process.env;
+const { APP_PORT, DATABASE_URL } = process.env;
 
 fastify.register(Postgres, {
-  connectionString: `postgresql://${DB_USER}:${DB_PASS}@${DB_URL}/${DB_NAME}`
+  connectionString: DATABASE_URL
 })
 
 fastify.register(Static, {
