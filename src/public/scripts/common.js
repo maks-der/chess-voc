@@ -201,15 +201,15 @@
         '</ul></div>' +
         '<script>' +
         '$("#styles").on("click", function(event) {$("#int-menu").html("");' +
-        '$.ajax({type: "GET", url: "/api/vocabulary?lexisClass=styles",' +
+        '$.ajax({type: "GET", url: "/api/vocabulary?lexicalGroup=styles",' +
         'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});' +
 
         '$("#name-of-person").on("click", function(event) {$("#int-menu").html("");' +
-        '$.ajax({type: "GET", url: "/api/vocabulary?lexisClass=nameOfPerson",' +
+        '$.ajax({type: "GET", url: "/api/vocabulary?lexicalGroup=nameOfPerson",' +
         'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});' +
 
         '$("#sports-gear").on("click", function(event) {$("#int-menu").html("");' +
-        '$.ajax({type: "GET", url: "/api/vocabulary?lexisClass=sportsGear",' +
+        '$.ajax({type: "GET", url: "/api/vocabulary?lexicalGroup=sportsGear",' +
         'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});</script>');
     });
 
@@ -224,15 +224,15 @@
         '</ul></div>' +
         '<script>' +
         '$("#general-use").on("click", function(event) {$("#int-menu").html("");' +
-        '$.ajax({type: "GET", url: "/api/vocabulary?classChar=generalUse",' +
+        '$.ajax({type: "GET", url: "/api/vocabulary?characteristic=generalUse",' +
         'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});' +
 
         '$("#general-sports").on("click", function(event) {$("#int-menu").html("");' +
-        '$.ajax({type: "GET", url: "/api/vocabulary?classChar=generalSports",' +
+        '$.ajax({type: "GET", url: "/api/vocabulary?characteristic=generalSports",' +
         'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});' +
 
         '$("#own").on("click", function(event) {$("#int-menu").html("");' +
-        '$.ajax({type: "GET", url: "/api/vocabulary?classChar=own",' +
+        '$.ajax({type: "GET", url: "/api/vocabulary?characteristic=own",' +
         'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});' +
         '</script>');
     });
