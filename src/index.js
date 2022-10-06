@@ -5,8 +5,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const fastify = Fastify();
-// const fastify = Fastify({logger: true});
+const fastify = Fastify({logger: Boolean(process.env.LOGGER || null)});
 
 fastify.register(Postgres, {
   connectionString: process.env.DATABASE_URL
