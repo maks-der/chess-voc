@@ -59,7 +59,7 @@ fastify.get('/api/vocabulary', (req, reply) => {
   });
 })
 
-await fastify.listen({port: process.env.PORT}, err => {
+await fastify.listen({port: process.env.PORT || 5000}, err => {
   if (err) throw err
   console.log(`Server listening on ${fastify.server.address().port}`)
 })
