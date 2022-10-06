@@ -5,7 +5,8 @@ import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const fastify = Fastify();
+// const fastify = Fastify();
+const fastify = Fastify({logger: true});
 
 fastify.register(Postgres, {
   connectionString: process.env.DATABASE_URL
@@ -48,7 +49,10 @@ const getQuery = (query) => {
         return "SELECT * FROM vocabulary WHERE characteristic LIKE '%власне%' ORDER BY id";
     }
   } else if (query.search) {
-    return `SELECT * FROM vocabulary WHERE name_1 ILIKE '%${query.search}%' OR name_2 ILIKE '%${query.search}%' ORDER BY id`;
+    return `SELECT *
+            FROM vocabulary
+            WHERE name_1 ILIKE '%${query.search}%' OR name_2 ILIKE '%${query.search}%'
+            ORDER BY id`;
   }
   return 'SELECT * FROM vocabulary';
 }
@@ -57,9 +61,9 @@ fastify.get('/api/vocabulary', (req, reply) => {
   fastify.pg.query(getQuery(req.query), function onResult(err, result) {
     reply.send(err || result)
   });
-})
+});
 
-await fastify.listen({port: process.env.PORT || 5000}, err => {
+await fastify.listen(process.env.PORT || 5000, '0.0.0.0', err => {
   if (err) throw err
   console.log(`Server listening on ${fastify.server.address().port}`)
-})
+});
