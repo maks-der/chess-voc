@@ -12,14 +12,14 @@
   "author": "Maksym Derevianchenko",
   "license": "MIT",
   "dependencies": {
-    "@fastify/postgres": "^5.1.0",
     "@fastify/static": "^6.5.0",
     "dotenv": "^16.0.3",
     "fastify": "^4.7.0",
-    "node": "^18.10.0",
-    "pg": "^8.8.0"
+    "mongodb": "^4.10.0",
+    "node": "^18.10.0"
   },
   "devDependencies": {
+    "@types/node": "^18.8.3",
     "nodemon": "^2.0.20"
   },
   "engines": {

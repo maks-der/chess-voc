@@ -1,15 +1,18 @@
 import Fastify from 'fastify';
 import Static from '@fastify/static';
-import Postgres from '@fastify/postgres';
+import {MongoClient} from 'mongodb';
 import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config();
 const fastify = Fastify({logger: Boolean(process.env.LOGGER || null)});
 
-fastify.register(Postgres, {
-  connectionString: process.env.DATABASE_URL
-})
+const client = new MongoClient(process.env.DATABASE_URL);
+
+await client.connect();
+console.log('Connected successfully to server');
+const collection = client.db('chess-voc').collection('vocabulary');
+
 
 fastify.register(Static, {
   root: path.resolve('./src/public'),
@@ -21,48 +24,45 @@ const getQuery = (query) => {
   if (query.partOfSpeech) {
     switch (query.partOfSpeech) {
       case "noun":
-        return "SELECT * FROM vocabulary WHERE part_of_speech LIKE '%іменник%' ORDER BY id";
+        return {partOfSpeech: 'іменник'}
       case "verb":
-        return "SELECT * FROM vocabulary WHERE part_of_speech LIKE '%дієслово%' ORDER BY id";
+        return {partOfSpeech: 'дієслово'}
       case "verbAdjective":
-        return "SELECT * FROM vocabulary WHERE part_of_speech LIKE '%дієприкметник%' ORDER BY id";
+        return {partOfSpeech: 'дієприкметник'}
       case "adjective":
-        return "SELECT * FROM vocabulary WHERE part_of_speech LIKE '%прикметник%' ORDER BY id";
+        return {partOfSpeech: 'прикметник'}
     }
-  } else if (query.lexisClass) {
-    switch (query.lexisClass) {
+  } else if (query.lexicalGroup) {
+    switch (query.lexicalGroup) {
       case "styles":
-        return "SELECT * FROM vocabulary WHERE lexical_group LIKE '%стилі%' ORDER BY id";
+        return {lexicalGroup: 'стилі, прийоми'}
       case "nameOfPerson":
-        return "SELECT * FROM vocabulary WHERE lexical_group LIKE '%особа%' ORDER BY id";
+        return {lexicalGroup: 'особа'}
       case "sportsGear":
-        return "SELECT * FROM vocabulary WHERE lexical_group LIKE '%знаряддя%' ORDER BY id";
+        return {lexicalGroup: 'знаряддя'}
     }
-  } else if (query.classChar) {
-    switch (query.classChar) {
+  } else if (query.characteristic) {
+    switch (query.characteristic) {
       case "generalUse":
-        return "SELECT * FROM vocabulary WHERE characteristic LIKE '%загальновживаний%' ORDER BY id";
+        return {characteristic: 'загальновживаний'}
       case "generalSports":
-        return "SELECT * FROM vocabulary WHERE characteristic LIKE '%загальноспортивний%' ORDER BY id";
+        return {characteristic: 'загальноспортивний'}
       case "own":
-        return "SELECT * FROM vocabulary WHERE characteristic LIKE '%власне%' ORDER BY id";
+        return {characteristic: 'власне шаховий'}
     }
   } else if (query.search) {
-    return `SELECT *
-            FROM vocabulary
-            WHERE name_1 ILIKE '%${query.search}%' OR name_2 ILIKE '%${query.search}%'
-            ORDER BY id`;
+    const re = new RegExp(query.search, 'i');
+    return {keyWords: re}
   }
-  return 'SELECT * FROM vocabulary';
+  return {};
 }
 
-fastify.get('/api/vocabulary', (req, reply) => {
-  fastify.pg.query(getQuery(req.query), function onResult(err, result) {
-    reply.send(err || result)
-  });
+fastify.get('/api/vocabulary', async (req, reply) => {
+  const res = await collection.find(getQuery(req.query)).toArray();
+  reply.send(res)
 });
 
-fastify.listen(process.env.PORT || 5000, '0.0.0.0', err => {
+fastify.listen({port: process.env.PORT || 5000, path: '0.0.0.0'}, err => {
   if (err) throw err
   console.log(`Server listening on ${fastify.server.address().port}`)
 });

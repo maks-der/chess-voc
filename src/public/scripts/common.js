@@ -92,12 +92,12 @@
         '</p></div>' +
         '<div className="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">' +
         '<p className="words-groups">Частина мови:<br><span className="text-primary">' +
-        row["part_of_speech"] +
+        row["partOfSpeech"] +
         '</span></p>' +
         '</div>' +
         '<div className="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">' +
         '<p className="words-groups">Лексико-семантична група:<br><span className="text-primary">' +
-        row["lexical_group"] +
+        row["lexicalGroup"] +
         '</span></p>' +
         '</div>' +
         '<div className="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">' +
@@ -138,7 +138,7 @@
           cache: false,
           success: function (data) {
             $("#block-search-result").show();
-            $("#list-search-result").html(data.rows.length != 0 ? rowsToHtml(data.rows) : noDataHtml(input_search));
+            $("#list-search-result").html(data.rows.length != 0 ? rowsToHtml(data) : noDataHtml(input_search));
           }
         });
       } else {
@@ -155,7 +155,7 @@
         url: 'api/vocabulary',
         success: (data) => {
           $("#block-search-result").show();
-          $('#list-search-result').append(rowsToHtml(data.rows));
+          $('#list-search-result').append(rowsToHtml(data));
         }
       });
     });
@@ -174,19 +174,19 @@
         '<script>' +
         '$("#nouns").on("click", function(event) {$("#int-menu").html("");' +
         '$.ajax({type: "GET", url: "/api/vocabulary?partOfSpeech=noun",' +
-        'success: function(data) { $("#list-search-result").append(rowsToHtml(data.rows));}});});' +
+        'success: function(data) { $("#list-search-result").append(rowsToHtml(data));}});});' +
 
         '$("#verbs").on("click", function(event) {$("#int-menu").html("");' +
         '$.ajax({type: "GET", url: "/api/vocabulary?partOfSpeech=verb",' +
-        'success: function(data) {$("#list-search-result").append(rowsToHtml(data.rows));	}});});' +
+        'success: function(data) {$("#list-search-result").append(rowsToHtml(data));	}});});' +
 
         '$("#adjectives").on("click", function(event) {$("#int-menu").html("");' +
         '$.ajax({type: "GET", url: "/api/vocabulary?partOfSpeech=adjective",' +
-        'success: function(data) {$("#list-search-result").append(rowsToHtml(data.rows));	}});});' +
+        'success: function(data) {$("#list-search-result").append(rowsToHtml(data));	}});});' +
 
         '$("#verb-adjectives").on("click", function(event) {$("#int-menu").html("");' +
         '$.ajax({type: "GET", url: "/api/vocabulary?partOfSpeech=verbAdjective",' +
-        'success: function(data) {$("#list-search-result").append(rowsToHtml(data.rows));	}});});' +
+        'success: function(data) {$("#list-search-result").append(rowsToHtml(data));	}});});' +
         '</script>');
     });
 
@@ -202,15 +202,15 @@
         '<script>' +
         '$("#styles").on("click", function(event) {$("#int-menu").html("");' +
         '$.ajax({type: "GET", url: "/api/vocabulary?lexisClass=styles",' +
-        'success: function(data) {$("#list-search-result").append(rowsToHtml(data.rows));}});});' +
+        'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});' +
 
         '$("#name-of-person").on("click", function(event) {$("#int-menu").html("");' +
         '$.ajax({type: "GET", url: "/api/vocabulary?lexisClass=nameOfPerson",' +
-        'success: function(data) {$("#list-search-result").append(rowsToHtml(data.rows));}});});' +
+        'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});' +
 
         '$("#sports-gear").on("click", function(event) {$("#int-menu").html("");' +
         '$.ajax({type: "GET", url: "/api/vocabulary?lexisClass=sportsGear",' +
-        'success: function(data) {$("#list-search-result").append(rowsToHtml(data.rows));}});});</script>');
+        'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});</script>');
     });
 
     $('#class-char').on('click', function (event) {
@@ -225,15 +225,15 @@
         '<script>' +
         '$("#general-use").on("click", function(event) {$("#int-menu").html("");' +
         '$.ajax({type: "GET", url: "/api/vocabulary?classChar=generalUse",' +
-        'success: function(data) {$("#list-search-result").append(rowsToHtml(data.rows));}});});' +
+        'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});' +
 
         '$("#general-sports").on("click", function(event) {$("#int-menu").html("");' +
         '$.ajax({type: "GET", url: "/api/vocabulary?classChar=generalSports",' +
-        'success: function(data) {$("#list-search-result").append(rowsToHtml(data.rows));}});});' +
+        'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});' +
 
         '$("#own").on("click", function(event) {$("#int-menu").html("");' +
         '$.ajax({type: "GET", url: "/api/vocabulary?classChar=own",' +
-        'success: function(data) {$("#list-search-result").append(rowsToHtml(data.rows));}});});' +
+        'success: function(data) {$("#list-search-result").append(rowsToHtml(data));}});});' +
         '</script>');
     });
   });
