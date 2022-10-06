@@ -59,7 +59,6 @@ const getQuery = (query) => {
 
 fastify.get('/api/vocabulary', async (req, reply) => {
   const res = await collection.find(getQuery(req.query)).toArray();
-  console.log(req.query, res.length)
   reply.send(res)
 });
 

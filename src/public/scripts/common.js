@@ -120,7 +120,7 @@
         // '$("#all-lexis-2").on("click", function(event) {' +
         // '$("#list-search-result").html("");' +
         // '$.ajax({type: "GET",url: "api/vocabulary",' +
-        // 'success: function(data) {$("#list-search-result").append(rowsToHtml(data.rows);}});});' +
+        // 'success: function(data) {$("#list-search-result").append(rowsToHtml(data);}});});' +
         // '</script></div></li>'
       );
     }
@@ -138,7 +138,7 @@
           cache: false,
           success: function (data) {
             $("#block-search-result").show();
-            $("#list-search-result").html(data.rows.length != 0 ? rowsToHtml(data) : noDataHtml(input_search));
+            $("#list-search-result").html(data.length != 0 ? rowsToHtml(data) : noDataHtml(input_search));
           }
         });
       } else {
