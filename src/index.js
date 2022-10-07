@@ -11,7 +11,7 @@ const client = new MongoClient(process.env.DATABASE_URL);
 
 await client.connect();
 console.log('Connected successfully to server');
-const collection = client.db('chess-voc').collection('vocabulary');
+const collection = client.db('client').collection('vocabulary');
 
 
 fastify.register(Static, {

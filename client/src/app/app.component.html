@@ -1,0 +1,35 @@
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+<!--    <img src="assets/showcase/images/primeng.svg" height="40" class="mr-2">-->
+<!--    <i class="pi pi-table"></i>-->
+
+  </ng-template>
+  <ng-template pTemplate="end">
+    <input type="text" pInputText placeholder="Пошук...">
+  </ng-template>
+</p-menubar>
+
+<p-image src="assets/chess-img-head.jpg" alt="Image" width="100%">
+  <ng-template pTemplate="indicator">
+    Indicator Content
+  </ng-template>
+</p-image>
+
+<div class="card bg-dark text-white">
+  <div class="card-img-overlay">
+    <h1 class="text-center" id="web-site-title">Словник шахової лексики української мови</h1>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+
+<footer class="bottom-0 fixed-bottom">
+  <div class="text-center mb-0">
+    <small class="text-muted fixed-bottom">
+      <a target="_blank" href="https://www.linkedin.com/in/maks-dev/" title="Maksym Derevianchenko">Сайт розроблено</a><br>
+      Вінниця. ДонНУ ім. Василя Стуса.<br>
+      Прикладна лінгвістика. 2017<br>
+      Оновлено в 2022
+    </small>
+  </div>
+</footer>
